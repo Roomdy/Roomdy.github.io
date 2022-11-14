@@ -1,3 +1,8 @@
+---
+layout: single
+title:  "실습예제 입니다."
+---
+
 ###### <span style="font-size:20px; font-weight:bold"> 숫자형
 
 
