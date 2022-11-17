@@ -20,7 +20,7 @@ title                    : "Roomdy의 성장일지"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Roomdy"
-description              : "I'm unemployed in the real world, and I'm a developer in other world"
+description              : "I'm unemployed in the real world, <br/> I'm a developer in other world"
 url                      : "https://Roomdy.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -106,7 +106,7 @@ analytics:
 author:
   name             : "Roomdy(Lv.1)"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I'm unemployed in the real world, and I'm a developer in **other world**"
+  bio              : "I'm unemployed in the real world, <br/> but I'm a developer in **other world**"
   location         : "Somewhere"
   email            :
   links:
