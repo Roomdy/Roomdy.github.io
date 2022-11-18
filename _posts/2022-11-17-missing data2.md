@@ -1,9 +1,27 @@
+---
+layout: single
+title:  "map함수를 활용한 결측치 처리"
+---
+
+<br/>**Data**<br/>
+data의 출처는 kaggle의 Big Data Certification KR 입니다.
+[바로 이동](https://www.kaggle.com/code/agileteam/py-t1-3-map-expected-questions/notebook)
+
+<br/>**Question**<br/>
+
+1. 결측치가 80% 이상인 컬럼 삭제
+2. 결측치가 80% 미만인 컬럼 'city'별 중앙값으로 대체
+3. 'f1'컬럼의 평균값 출력
+
+<br/>**1. 라이브러리 및 데이터 불러오기**<br/>
+
 ```python
 import pandas as pd                                 #판다스 불러오기
 import numpy as np                                  #넘파이 불러오기
 df=pd.read_csv('C:/Users/woody/data/basic1.csv')    #데이터 불러오기
 ```
 
+<br/>**2. EDA**<br/>
 
 ```python
 #EDA
@@ -27,19 +45,6 @@ df.head()               #데이터 확인
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -116,7 +121,7 @@ df.head()               #데이터 확인
 </div>
 
 
-
+<br/>**3. 결측치 개수와 총 데이터 개수 확인**<br/>
 
 ```python
 print(df.isnull().sum())    #결측치 개수 
@@ -134,10 +139,11 @@ print(df.shape[0])       #전체 행 개수 = 데이터 개수
     dtype: int64
     100
     
-
+<br/>**3. 결측치 비율 조회**<br/>
+논리: 결측치 개수/ 총 데이터 개수 == 결측치 비율
 
 ```python
-print(df.isnull().sum()/df.shape[0])  #결측치 비율
+print(df.isnull().sum()/df.shape[0])  
 ```
 
     id      0.00
@@ -150,7 +156,7 @@ print(df.isnull().sum()/df.shape[0])  #결측치 비율
     f5      0.00
     dtype: float64
     
-
+<br/>**4. 결측치가 80프로 이상인 'f3' 컬럼 삭제**<br/>
 
 ```python
 del df['f3']  #결측치가 80% 이상인 'f3' column 삭제
@@ -159,20 +165,6 @@ df.head()     #데이터 확인
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -243,12 +235,11 @@ df.head()     #데이터 확인
 </div>
 
 
-
+<br/>**4. 결측치가 80프로 미만인 'f1' 컬럼의 'city'별 중앙값 계산**<br/>
 
 ```python
 print(df.groupby(['city'])['f1'].median())       #city별 중앙값 확인
-     #해석: 'city' 범주별로 'f1' 범주에 대한 중앙값
-k, d, b, s = df.groupby(['city'])['f1'].median() #각 변수에 저장
+           #해석: 'city' 범주별로, 'f1' 범주에 대한 중앙값
 ```
 
     city
@@ -258,28 +249,19 @@ k, d, b, s = df.groupby(['city'])['f1'].median() #각 변수에 저장
     서울    68.0
     Name: f1, dtype: float64
     
-
+<br/>**5. 각 변수에 중앙값 저장**<br/>
 
 ```python
-df[18:21]  #결측치 대치 전 데이터 확인
+k, d, b, s = df.groupby(['city'])['f1'].median()
+```
+
+<br/>**5. 결측치 대체 전 데이터 확인**<br/>
+
+```python
+df[18:21]
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -331,6 +313,7 @@ df[18:21]  #결측치 대치 전 데이터 확인
 
 
 
+<br/>**6. map함수를 활용한 결측치 대체**<br/>
 
 ```python
 df['f1']=df['f1'].fillna(df['city'].map({'경기':k, '대구':d, '부산':b, '서울': s}))
@@ -339,20 +322,6 @@ df[18:21] #대치 후 데이터 확인
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -403,7 +372,7 @@ df[18:21] #대치 후 데이터 확인
 </div>
 
 
-
+<br/>**7. 'f1'컬럼의 평균값 출력**<br/>
 
 ```python
 print(df['f1'].mean())
