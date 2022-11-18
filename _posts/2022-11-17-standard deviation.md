@@ -1,9 +1,26 @@
+---
+layout: single
+title:  "조건에 맞는 데이터의 표준편차 계산"
+---
+
+<br/>**Data**<br/>
+data 출처는 kaggle의 Big Data Certification KR입니다.
+[바로 이동](https://www.kaggle.com/code/agileteam/py-t1-5-expected-questions/notebook)
+
+<br/>**Question**<br/>
+
+1. 'f4'컬럼의 값이 'ENFJ'와 'INFP'인 행의 'f1'값 표준편차 구하기
+2. 표준편차 차이를 절대값으로 구하기
+
+<br/>**1. 라이브러리 및 데이터 불러오기**<br/>
+
 ```python
 import pandas as pd                               #판다스 불러오기
 import numpy as np                                #넘파이 불러오기
 df=pd.read_csv('C:/Users/woody/data/basic1.csv')  #데이터 불러오기
 ```
 
+<br/>**2. 'f4'가 'ENFJ'와 'INFP'인 데이터 저장**<br/>
 
 ```python
 enfj=df[df['f4']=='ENFJ']   #f4가 ENFJ인 데이터 저장
@@ -27,7 +44,7 @@ print(infp)
     96  id97  100.0   경기   NaN   0  NaN  INFP  67.886373
     97  id98   39.0   경기  58.0   2  NaN  INFP  98.429899
     
-
+<br/>**3. 각 데이터의 'f1' 표준편차 저장**<br/>
 
 ```python
 enfj_std=enfj['f1'].std()  #enfj변수의 'f1' 표준편차 저장
@@ -40,11 +57,11 @@ enfj_std, infp_std
 
     (17.727097901235837, 23.586719427112648)
 
-
+<br/>**3. 표준편차 차이의 절대값 계산**<br/>
 
 
 ```python
-print(abs(enfj_std-infp_std))  #표준편차 차이의 절대값 계산
+print(abs(enfj_std-infp_std))  
 ```
 
     5.859621525876811
