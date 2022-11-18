@@ -7,7 +7,7 @@ title:  "결측치 처리 후 그룹 합계 구하기"
 data 출처는 kaggle의 Big Data Certification KR입니다.<br/>
 [바로 이동](https://www.kaggle.com/code/agileteam/py-t1-6-expected-questions/notebook)
 
-<br/>**Question**
+<br/>**Question**<br/>
 
 1. 'f1'컬럼의 결측 데이터 제거
 2. 'city'와 'f2'칼럼을 기준으로 그룹 합계 구하기
@@ -15,7 +15,7 @@ data 출처는 kaggle의 Big Data Certification KR입니다.<br/>
 
 <br/>**0. 새롭게 등장하는 함수**<br/>
 
-    data.dropna(subset = ['컬럼명1', '컬럼명2', ...)
+    data.dropna(subset = ['컬럼명1', '컬럼명2', ...])
      #특정 컬럼의 결측치가 있는 행을 삭제할 때 사용합니다.
     data.groupby(['기준컬럼1','기준컬럼2',...])
      #기준컬럼을 기준으로 정렬
@@ -129,7 +129,7 @@ df.head()                #데이터 확인
 </table>
 </div>
 
-<br/>**3. 'f1'컬럼의 결측치 제거 **<br/>
+<br/>**3. 'f1'컬럼의 결측치 제거**<br/>
 
 ```python
 df=df.dropna(subset='f1')    #dropna함수로 'f1' 칼럼의 결측치 제거
@@ -351,7 +351,7 @@ df.groupby(['city','f2']).sum()  #groupby 함수로 조건별 합계 계산
 </div>
 
 
-<br/>**4. 'city'== '경기' & 'f2' == 0인 조건에 만족하는 'f1'값 구하기**<br/>
+<br/>**5. 'city'== '경기' & 'f2' == 0인 조건에 만족하는 'f1'값 구하기**<br/>
 
 ```python
 df_f1=df[(df['city']=='경기') & (df['f2']==0)]['f1']
