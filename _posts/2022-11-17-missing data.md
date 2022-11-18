@@ -1,18 +1,45 @@
+---
+layout: single
+title:  "결측치 처리 후 그룹 합계 구하기"
+---
+
+<br/>**Data**<br/>
+data 출처는 kaggle의 Big Data Certification KR입니다.<br/>
+[바로 이동](https://www.kaggle.com/code/agileteam/py-t1-6-expected-questions/notebook)
+
+<br/>**Question**
+
+1. 'f1'컬럼의 결측 데이터 제거
+2. 'city'와 'f2'칼럼을 기준으로 그룹 합계 구하기
+3. ('city'== '경기' & 'f2' == 0)인 조건에 만족하는 'f1'값 구하기
+
+<br/>**0. 새롭게 등장하는 함수**<br/>
+
+    data.dropna(subset = ['컬럼명1', '컬럼명2', ...)
+     #특정 컬럼의 결측치가 있는 행을 삭제할 때 사용합니다.
+    data.groupby(['기준컬럼1','기준컬럼2',...])
+     #기준컬럼을 기준으로 정렬
+    data.groupby(['기준컬럼1','기준컬럼2',...]).sum()
+     #기준컬럼을 기준으로 그룹합계 
+
+<br/>**1. 라이브러리 및 데이터 불러오기**<br/>
+
 ```python
 import pandas as pd                               #판다스 불러오기
 import numpy as np                                #넘파이 불러오기
 df=pd.read_csv('C:/Users/woody/data/basic1.csv')  #데이터 불러오기
 ```
 
+<br/>**2. EDA**<br/>
 
 ```python
-#EDA
 print(df.shape)          #행, 열 개수 확인
 print(df.describe())     #기초통계량 확인
 df.head()                #데이터 확인
 ```
 
     (100, 8)
+    
                   age          f1          f2          f5
     count  100.000000   69.000000  100.000000  100.000000
     mean    50.963000   66.043478    0.650000   56.734537
@@ -27,19 +54,6 @@ df.head()                #데이터 확인
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -115,8 +129,7 @@ df.head()                #데이터 확인
 </table>
 </div>
 
-
-
+<br/>**3. 'f1'컬럼의 결측치 제거 **<br/>
 
 ```python
 df=df.dropna(subset='f1')    #dropna함수로 'f1' 칼럼의 결측치 제거
@@ -216,6 +229,7 @@ df.head()                    #데이터 확인
 
 
 
+<br/>**4. 'city'와 'f2' 기준 그룹합계 구하기**<br/>
 
 ```python
 df.groupby(['city','f2']).sum()  #groupby 함수로 조건별 합계 계산
@@ -337,11 +351,13 @@ df.groupby(['city','f2']).sum()  #groupby 함수로 조건별 합계 계산
 </div>
 
 
-
+<br/>**4. 'city'== '경기' & 'f2' == 0인 조건에 만족하는 'f1'값 구하기**<br/>
 
 ```python
 df_f1=df[(df['city']=='경기') & (df['f2']==0)]['f1']
+ #데이터프레임[행 인덱스][열 인덱스]
 ```
+
 
 
 
@@ -364,7 +380,3 @@ df_f1=df[(df['city']=='경기') & (df['f2']==0)]['f1']
 
 
 
-
-```python
-
-```
