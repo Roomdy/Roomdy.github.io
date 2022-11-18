@@ -27,7 +27,7 @@ data 출처는 kaggle의 Big Data Certification KR입니다.<br/>
 ```python
 import pandas as pd                               #판다스 불러오기
 import numpy as np                                #넘파이 불러오기
-df=pd.read_csv('C:/Users/woody/data/basic1.csv')  #데이터 불러오기
+df=pd.read_csv('...data/basic1.csv')  #데이터 불러오기
 ```
 
 <br/>**2. EDA**<br/>
