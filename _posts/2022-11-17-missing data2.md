@@ -13,6 +13,16 @@ data의 출처는 kaggle의 Big Data Certification KR 입니다.
 2. 결측치가 80% 미만인 컬럼 'city'별 중앙값으로 대체
 3. 'f1'컬럼의 평균값 출력
 
+<br/>**0. 처음 등장하는 함수**<br/>
+
+    .map({key1:value1, key2:value2, ... })   
+     # 딕셔너리에 정의한 데이터를 변수에 적용할 수 있는 함수
+     
+map함수에 대해선 아직도 헷갈리는 부분이 많습니다.<br/>
+해당 페이지에서 먼저 map함수의 기능을 살펴본 후 문제에 접근하면 이해가 쉬울듯 합니다.
+
+[map 다루기](https://www.dacon.io/codeshare/586)
+
 <br/>**1. 라이브러리 및 데이터 불러오기**<br/>
 
 ```python
