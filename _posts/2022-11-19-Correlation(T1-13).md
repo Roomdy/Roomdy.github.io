@@ -1,9 +1,32 @@
+---
+layout: single
+title:  "corr함수로 상관관계 구하기"
+---
+
+<br/>**Data**<br/>
+
+출처는 Kaggle의 Big Data Certification 입니다.<br/>
+[출처 이동](https://www.kaggle.com/code/agileteam/py-t1-8-expected-questions/notebook)
+
+<br/>**Question**<br/>
+
+1. 주어진 데이터에서 상관관계 구하기
+2. quality와 상관관계가 가장 큰 값과, 가장 작은 값 구하기
+3. 합계 계산(소수점 둘째 자리까지 출력)
+
+<br/>**0. 처음 등장하는 함수**<br/>
+
+    Dataframe.corr()  #두 열간의 상관계수 반환 (범위 -1~1)
+    
+<br/>**1. 라이브러리 및 데이터 불러오기**<br/>    
+
 ```python
 import pandas as pd        #판다스 불러오기
 import numpy as np         #넘파이 불러오기
-df_wine=pd.read_csv('C:/Users/woody/data/winequality-red.csv')
+df_wine=pd.read_csv('.../data/winequality-red.csv')
 ```
 
+<br/>**2. EDA**<br/>    
 
 ```python
 print(df_wine.info())  
@@ -35,19 +58,6 @@ df_wine.head()
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -148,7 +158,7 @@ df_wine.head()
 </div>
 
 
-
+<br/>**3. corr함수로 상관계수 구하기**<br/>
 
 ```python
 df_wine_corr=df_wine.corr()     #각 변수별 상관계수 조회
@@ -158,19 +168,6 @@ df_wine_corr
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -376,10 +373,13 @@ df_wine_corr
 </div>
 
 
++동일 변수간의 상관계수는 1임을 알 수 있다.<br/>
+
+<br/>**4. quality-quality간의 상관계수(=1) 제거**<br/>
 
 
 ```python
-df_wine_corr[:-1]['quality']   #quality- quality의 상관계수(=1)는 제거
+df_wine_corr[:-1]['quality']   
 ```
 
 
@@ -399,6 +399,7 @@ df_wine_corr[:-1]['quality']   #quality- quality의 상관계수(=1)는 제거
     Name: quality, dtype: float64
 
 
+<br/>**4. 가장 큰 값과 가장 작은 값 구하기**<br/>
 
 
 ```python
@@ -415,7 +416,7 @@ Max, Min
     (0.47616632400113656, 0.013731637340065779)
 
 
-
+<br/>**5. 합계 출력**<br/>
 
 ```python
 print(round((Max + Min),2))               #합계(소수점 둘째 자리까지)
