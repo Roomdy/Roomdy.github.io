@@ -144,12 +144,10 @@ scaler=MinMaxScaler()                       #scaler 객체 생성
 
 <br/>**4. fit_transform 매서드 적용**<br/>
 
-훈련 데이터에는 fit 매서드를 통해 데이터의 분포를 학습한 후<br/>
-transform 매서드를 적용해 스케일을 조정해야하나<br/>
-현재는 훈련데이터와 테스트데이터가 구분되어 있지 않으므로<br/>
-매서드를 동시에 적용시키는 fit_transform 매서드를 사용합니다.<br/>
-transform()과 fit_transform()의 차이에 대해 아주 잘 설명해둔 블로그가 있어 소개드립니다.<br/>
-[블로그 이동](https://deepinsight.tistory.com/165)<
+왜 fit과 transform 매서드가 사용되어야 하는지<br/>
+transform()과 fit_transform()의 차이는 무엇인지<br/>
+아주 잘 설명해둔 글이 있어 소개해드립니다.<br/>
+[블로그 이동](https://deepinsight.tistory.com/165)<br/>
 
 ```python
 df['f5']=scaler.fit_transform(df[['f5']])   #.fit_transform( ) 명령
