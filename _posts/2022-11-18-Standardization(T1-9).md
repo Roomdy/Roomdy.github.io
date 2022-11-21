@@ -1,10 +1,29 @@
+---
+layout: single
+title:  "StandardScaler를 사용해 수치형 변수 표준화시키기"
+---
+
+<br/>**Data**<br/>
+
+출처는 Kaggle의 Big Data Certification 입니다.<br/>
+[출처 이동](https://www.kaggle.com/code/agileteam/py-t1-8-expected-questions/notebook)
+
+<br/>**Question**<br/>
+
+1. 'f5'컬럼을 표준화하기
+2. 중앙값 구하기
+
+<br/>**1. 라이브러리 및 데이터 불러오기**<br/>
+
 ```python
 import pandas as pd                                  #판다스 불러오기
 import numpy as np                                   #넘파이 불러오기
 from sklearn.preprocessing import StandardScaler
    #sklearn 라이브러리의 preprocessing 모듈 중 StandardScaler 함수 가져오기
-df=pd.read_csv('C:/Users/woody/data/basic1.csv')     #데이터 불러오기
+df=pd.read_csv('.../data/basic1.csv')     #데이터 불러오기
 ```
+
+<br/>**2. EDA**<br/>
 
 
 ```python
@@ -30,22 +49,6 @@ df.head()
     None
     
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -122,44 +125,26 @@ df.head()
 </div>
 
 
+<br/>**3. 스케일링 위한 객체 생성**<br/>
 
+스케일링을 하기 위해선<br/>
+항상 먼저 변형 정보를 저장할 변형 객체를 생성합니다.<br/>
 
 ```python
 scaler = StandardScaler()         #scaler라는 객체 생성
 ```
 
 
+<br/>**4. fit_transform 매서드 적용시키기**<br/>
 
-
-    StandardScaler()
-
-
-
+[왜 fit_tranform 매서드를 사용하는 걸까](https://deepinsight.tistory.com/165)
 
 ```python
-scaler.fit_transform(df[['f5']])[0:9]     #객체에 fit_transform() 명령
-```
-
-
-
-
-    array([[ 1.22081535],
-           [ 0.1273431 ],
-           [-1.39453546],
-           [-0.14366749],
-           [-0.9700848 ],
-           [-1.29293552],
-           [-1.65791175],
-           [ 0.95193593],
-           [-1.39453546]])
-
-
-
-
-```python
+scaler.fit_transform(df[['f5']])[0:9]      #객체에 fit_transform() 명령
 df['f5']=scaler.fit_transform(df[['f5']])  #df에 저장
 ```
 
+<br/>**5. 중앙값 출력**<br/>
 
 ```python
 print(df['f5'].median())     #중앙값 출력  
