@@ -22,6 +22,9 @@ from sklearn.preprocessing import StandardScaler
    #sklearn 라이브러리의 preprocessing 모듈 중 StandardScaler 함수 가져오기
 df=pd.read_csv('.../data/basic1.csv')     #데이터 불러오기
 ```
+StandardScaler는 데이터를 평균값은 0, 표준편차는 1로 스케일링 하며,<br/>
+주로 범주형 형태를 분류할 때 사용됩니다.<br/>
+
 
 <br/>**2. EDA**<br/>
 
