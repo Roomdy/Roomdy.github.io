@@ -291,7 +291,7 @@ df.head(10)                                 #데이터 확인
 
 <br/>**5. qunatile 함수로 상하위값 구하기**<br/>
 
-사분위수는 자료를 오름차순(small -> big)으로 배열새 4등분한 값이므로<br/>
+사분위수는 자료를 오름차순(small -> big)으로 배열해 4등분한 값이므로<br/>
 처음 5%의 데이터가 하위5%값이 되고<br/>
 마지막 5%의 데이터가 상위5%값이 됩니다.<br/>
 
@@ -310,7 +310,7 @@ df_lower, df_upper
 
 
 ```python
-print(df_lower+df_upper)                     #합
+print(df_lower+df_upper)                     
 ```
 
     1.0248740983597389
