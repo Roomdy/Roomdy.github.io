@@ -4,16 +4,19 @@ title:  "cumsum 함수로 누적합 계산하기"
 ---
 
 <br/>**Data**<br/>
+
 출처는 Kaggle의 Big Data Certification 입니다.<br/>
 [출처 이동](https://www.kaggle.com/code/agileteam/py-t1-8-expected-questions/notebook)
 
 <br/>**Question**<br/>
+
 1. 'f2'컬럼이 1인 데이터의 'f1'컬럼 누적합 계산
 2. 누적합 결측치는 바로 뒤의 값으로 채우기<br/>
    (단, 결측치 바로 뒤의 값이 없으면 다음에 나오는 값으로)
 3. 누적합의 평균값 출력
 
 <br/>**0. 처음 등장하는 함수**<br/>
+
     Series.cumsum()                   #데이터의 누적합 계산
     Dataframe.fillna(method='bfill')  #결측치를 바로 다음값으로 대체
 
