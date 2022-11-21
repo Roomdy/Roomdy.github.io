@@ -1,9 +1,31 @@
+---
+layout: single
+title:  "cumsum 함수로 누적합 계산하기"
+---
+
+<br/>**Data**<br/>
+출처는 Kaggle의 Big Data Certification 입니다.<br/>
+[출처 이동](https://www.kaggle.com/code/agileteam/py-t1-8-expected-questions/notebook)
+
+<br/>**Question**<br/>
+1. 'f2'컬럼이 1인 데이터의 'f1'컬럼 누적합 계산
+2. 누적합 결측치는 바로 뒤의 값으로 채우기<br/>
+   (단, 결측치 바로 뒤의 값이 없으면 다음에 나오는 값으로)
+3. 누적합의 평균값 출력
+
+<br/>**0. 처음 등장하는 함수**<br/>
+    Series.cumsum()                   #데이터의 누적합 계산
+    Dataframe.fillna(method='bfill')  #결측치를 바로 다음값으로 대체
+
+<br/>**1. 라이브러리 및 데이터 불러오기**<br/>
+
 ```python
 import pandas as pd                                #판다스 불러오기
 import numpy as np                                 #넘파이 불러오기
-df=pd.read_csv('C:/Users/woody/data/basic1.csv')   
+df=pd.read_csv('.../data/basic1.csv')   
 ```
 
+<br/>**2. EDA**<br/>
 
 ```python
 print(df.info())
@@ -30,20 +52,6 @@ df.head()
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -120,14 +128,14 @@ df.head()
 </div>
 
 
-
+<br/>**3. cumsum함수로 누적합 계산**<br/>
 
 ```python
-df2=df[df['f2']==1]['f1'].cumsum()         #조건 + 누적합 
-df2
+df2=df[df['f2']==1]['f1'].cumsum()   #df2에 조건을 만족하는 누적합 데이터 저장
+df2                                  #데이터 확인   
 ```
 
-
+결측치가 존재함을 알 수 있습니다.(인덱스 16, 20,...)<br/>
 
 
     1       70.0
@@ -170,15 +178,15 @@ df2
     Name: f1, dtype: float64
 
 
-
+<br/>**4. fillna함수로 결측치 대체**<br/>
 
 ```python
 df2=df2.fillna(method='bfill')            #결측치 대체
 df2
 ```
 
-
-
+결측치가 다음값으로 채워졌음을 알 수 있습니다.<br/>
+만약, 바로 직전값으로 결측치를 대체하고 싶다면 'method='ffill'을 사용합니다.
 
     1       70.0
     2      131.0
@@ -219,6 +227,8 @@ df2
     95    1754.0
     Name: f1, dtype: float64
 
+
+<br/>**4. 대체 후 평균값 출력**<br/>
 
 
 
