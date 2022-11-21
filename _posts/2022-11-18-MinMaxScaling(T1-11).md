@@ -1,11 +1,37 @@
+---
+layout: single
+title:  "cumsum 함수로 누적합 계산하기"
+---
+
+<br/>**Data**<br/>
+
+출처는 Kaggle의 Big Data Certification 입니다.<br/>
+[출처 이동](https://www.kaggle.com/code/agileteam/py-t1-8-expected-questions/notebook)
+
+<br/>**Question**<br/>
+
+1. 'f5'컬럼을 min-max 스케일 변환
+2. 상위 5%와 하위 5% 값의 합 구하기
+
+<br/>**0. 처음 등장하는 함수**<br/>
+
+    from sklearn.preprocessing import MinMaxScaler
+     #sklearn 라이브러리 preprocessing(전처리) 모듈의 MinMaxScaler 함수 불러오기
+     #MinMaxScaler는 데이터를 최솟값 0, 최댓값 1을 기준으로 스케일링 해줍니다.
+     #주로 변수가 연속형 범주인 회귀 문제에서 사용됩니다.
+     
+    
+<br/>**1. 라이브러리 및 데이터 불러오기**<br/>
+
 ```python
 import pandas as pd                                #판다스 불러오기
 import numpy as np                                 #넘파이 불러오기
 from sklearn.preprocessing import MinMaxScaler
   #sklearn 라이브러리 preprocessing 모듈의 MinMaxScaler 함수 불러오기
-df=pd.read_csv('C:/Users/woody/data/basic1.csv')   #데이터 불러오기
+df=pd.read_csv('.../data/basic1.csv')   #데이터 불러오기
 ```
 
+<br/>**2. EDA**<br/>
 
 ```python
 print(df.info())
@@ -31,21 +57,6 @@ df.head()
     
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -121,13 +132,21 @@ df.head()
 </table>
 </div>
 
+<br/>**2. EDA**<br/>
 
-
+<br/>**3. 객체 생성**<br/>
+스케일링을 사용할 때는 항상 변형 정보를 저장하는 변형 객체를 먼저 생성합니다.<br/>
 
 ```python
 scaler=MinMaxScaler()                       #scaler 객체 생성
 ```
 
+
+<br/>**4. fit_transform 매서드 적용**<br/>
+훈련 데이터에는 fit 매서드를 통해 데이터의 분포를 학습한 후<br/>
+transform 매서드를 적용해 스케일을 조정해야하나<br/>
+현재는 훈련데이터와 테스트데이터가 구분되어 있지 않으므로<br/>
+매서드를 동시에 적용시키는 fit_transform 매서드를 사용합니다.
 
 ```python
 df['f5']=scaler.fit_transform(df[['f5']])   #.fit_transform( ) 명령
@@ -135,21 +154,6 @@ df.head(10)                                 #데이터 확인
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -280,8 +284,15 @@ df.head(10)                                 #데이터 확인
 </table>
 </div>
 
+'f5'컬럼의 스케일이 정상적으로 조정되었음을 알 수 있습니다.
 
 
+
+<br/>**5. qunatile 함수로 상하위값 구하기**<br/>
+
+사분위수는 자료를 오름차순(small -> big)으로 배열새 4등분한 값이므로<br/>
+처음 5%의 데이터가 하위5%값이 되고<br/>
+마지막 5%의 데이터가 상위5%값이 됩니다.<br/>
 
 ```python
 df_lower=df['f5'].quantile(0.05)            #하위 5%값
@@ -294,7 +305,7 @@ df_lower, df_upper
 
     (0.03670782406038746, 0.9881662742993513)
 
-
+<br/>**6. 합계 **<br/>
 
 
 ```python
