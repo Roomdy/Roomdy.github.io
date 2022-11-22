@@ -1,8 +1,25 @@
+---
+layout: single
+title:  ""
+---
+
+<br/>**Data**<br/>
+
+출처는 Kaggle의 Big Data Certification 입니다.<br/>
+[출처 이동](https://www.kaggle.com/code/agileteam/py-t1-8-expected-questions/notebook)
+
+<br/>**Question**<br/>
+1. age 컬럼 상위 20개 데이터 구하기
+2. f1 컬럼의 결측치를 중앙값으로 채우기
+3. f4가 ISFJ이고, F5가 20 이상인 데이터의 f1 평균값 계산
+
+<br/>**1. 라이브러리 및 데이터 불러오기**<br/>
+
 ```python
 import pandas as pd                                #판다스 불러오기
-df=pd.read_csv('C:/Users/woody/data/basic1.csv')   #데이터 불러오기
+df=pd.read_csv('.../data/basic1.csv')   #데이터 불러오기
 ```
-
+<br/>**2. EDA**<br/>
 
 ```python
 print(df.info())
@@ -28,21 +45,6 @@ df.head()
     
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -119,29 +121,16 @@ df.head()
 </div>
 
 
+<br/>**3. 'age' 컬럼 기준으로 내림차순 정렬**<br/>
 
++ ascending=False 옵션을 추가해야 내림차순으로 데이터가 정렬됩니다.
 
 ```python
-df=df.sort_values('age',ascending=False)       #'age' 기준 내림차순 정렬
+df=df.sort_values('age',ascending=False)       
 df.head()                                      #데이터 확인
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -219,136 +208,21 @@ df.head()                                      #데이터 확인
 
 
 
+<br/>**4. 상위 20개 데이터 저장**<br/>
 
 ```python
 df_top=df.head(20)        #df_top 변수에 상위 20개 값만 저장
-df_top.head(5) 
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>age</th>
-      <th>city</th>
-      <th>f1</th>
-      <th>f2</th>
-      <th>f3</th>
-      <th>f4</th>
-      <th>f5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>96</th>
-      <td>id97</td>
-      <td>100.0</td>
-      <td>경기</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>INFP</td>
-      <td>67.886373</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>id37</td>
-      <td>100.0</td>
-      <td>부산</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>ESTP</td>
-      <td>33.308999</td>
-    </tr>
-    <tr>
-      <th>44</th>
-      <td>id45</td>
-      <td>97.0</td>
-      <td>대구</td>
-      <td>88.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>ENFJ</td>
-      <td>13.049921</td>
-    </tr>
-    <tr>
-      <th>91</th>
-      <td>id92</td>
-      <td>97.0</td>
-      <td>경기</td>
-      <td>78.0</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>INFP</td>
-      <td>97.381034</td>
-    </tr>
-    <tr>
-      <th>51</th>
-      <td>id52</td>
-      <td>97.0</td>
-      <td>대구</td>
-      <td>82.0</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>ISFJ</td>
-      <td>90.496999</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
+<br/>**5. fillna()함수를 사용하여 'f1'의 결측치 중앙값 대치**<br/>
 
 ```python
 df_top['f1']=df_top['f1'].fillna(df_top['f1'].median())
-  #df_top의 'f1' 변수에 결측치 중위값으로 채우기(fillna 함수 사용)
+  #df_top의 'f1' 변수에 결측치 중위값으로 채우기
 df_top.head()
 ```
 
-    C:\Users\woody\AppData\Local\Temp\ipykernel_25788\437934613.py:1: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      df_top['f1']=df_top['f1'].fillna(df_top['f1'].median())
-    
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -425,29 +299,17 @@ df_top.head()
 </div>
 
 
+<br/>**6. cond 변수에 조건 저장**<br/>
 
++ 조건을 cond(condition의 약자) 변수에 저장해서 조회하면 인덱싱에 편리합니다.
 
 ```python
-cond=df_top[(df_top['f4']=='ISFJ') & (df_top['f5']>=20)]   #( ) & ( ) 형식 안취하면 오류남
-cond                                                       #condition(조건)의 약자
+cond=(df_top['f4']=='ISFJ') & (df_top['f5']>=20)]  
+  #( ) & ( ) 형식을 안취하면 오류가 발생합니다.
+df_top[cond]                                                   
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -516,7 +378,7 @@ cond                                                       #condition(조건)의
 
 
 ```python
-print(cond['f1'].mean())                       #'f1'의 평균 출력
+print(df_top[cond]['f1'].mean())                       #'f1'의 평균 출력
 ```
 
     73.875
