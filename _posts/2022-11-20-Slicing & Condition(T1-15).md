@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  ""
+title:  "결측치 처리 후 조건에 따른 평균값 계산하기"
 ---
 
 <br/>**Data**<br/>
