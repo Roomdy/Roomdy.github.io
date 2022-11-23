@@ -1,14 +1,42 @@
+---
+layout: single
+title:  "var 함수를 통해 데이터의 분산 구하기"
+---
+
+<br/>**Data**<br/>
+
+출처는 Kaggle의 Big Data Certification 입니다.<br/>
+[출처 이동](https://www.kaggle.com/code/agileteam/py-t1-8-expected-questions/notebook)
+
+<br/>**Question**<br/>
+
+1. basic1 데이터 중 age 컬럼의 이상치 제거
+2. 나이순으로 크기가 동일한 3그룹 나누기
+3. 각 그룹의 중앙값 더하기
+
+<br/>**0. 처음 등장하는 함수**<br/>
+
+    pd.qcut(dateframe['기준 열'], 그룹 수, labels=[그룹1, 그룹2, 그룹3,...])
+    
+ + qcut 함수는 동일한 데이터 개수로 구간을 나눕니다.
+ + 기준 열을 설정하면 크기순으로 그룹을 나눕니다.
+ + labels 옵션으로 그룹명을 지정할 수 있습니다.
+
+<br/>**1. 라이브러리 및 데이터 불러오기**<br/>
+
 ```python
 import pandas as pd                                #판다스 불러오기
-import numpy as np                                 #넘파이 불러오기
 df=pd.read_csv('C:/Users/woody/data/basic1.csv')   #데이터 불러오기
 ```
 
+<br/>**2. EDA**<br/>
 
 ```python
-print(df.describe())   #age에 음수값, 소수점이 있는 값이 있는 것을 알 수 있습니다.
+print(df.describe())  
 df.head()
 ```
+
++ age에 음수값, 소수점이 있는 값이 있는 것을 알 수 있습니다.
 
                   age          f1          f2          f5
     count  100.000000   69.000000  100.000000  100.000000
@@ -22,21 +50,6 @@ df.head()
     
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -112,7 +125,7 @@ df.head()
 </table>
 </div>
 
-
+<br/>**3. age 컬럼의 이상치 제거**<br/>
 
 
 ```python
@@ -121,22 +134,9 @@ df=df[(df['age']-np.ceil(df['age'])==0)]   #소수점이 있는 이상치 제거
 df
 ```
 
++ (age 값 - 올림한 age 값 == 0)인 소수점이 없는 값만 df 변수에 저장합니다.
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -292,14 +292,13 @@ df
 </div>
 
 
-
+<br/>**4. quct 함수로 그룹 나누기**<br/>
 
 ```python
 pd.qcut(df['age'], 3)      #pd.qcut()함수로 그룹 나누기
-                           #라벨명을 붙이기 전이므로 각 구간의 범위가 라벨명임
 ```
 
-
++ 라벨명을 붙이기 전이므로 각 구간의 범위가 라벨명이 되었습니다.
 
 
     0      (0.999, 38.667]
@@ -317,7 +316,7 @@ pd.qcut(df['age'], 3)      #pd.qcut()함수로 그룹 나누기
     Categories (3, interval[float64, right]): [(0.999, 38.667] < (38.667, 73.333] < (73.333, 100.0]]
 
 
-
+<br/>**5. 라벨명 붙이기**<br/>
 
 ```python
 df['group']=pd.qcut(df['age'], 3, labels=['group1', 'group2', 'group3'])
@@ -325,21 +324,6 @@ df.head()
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -422,7 +406,7 @@ df.head()
 </div>
 
 
-
++ .value_count()함수를 통해 각 그룹에 속한 데이터 개수를 확인할 수 있습니다.
 
 ```python
 df['group'].value_counts()    #각 그룹의 value 카운트
@@ -436,7 +420,7 @@ df['group'].value_counts()    #각 그룹의 value 카운트
     group3    30
     Name: group, dtype: int64
 
-
+<br/>**6. 그룹별 중앙값 구하기**<br/>
 
 
 ```python
@@ -452,7 +436,7 @@ group1, group2, group3
     (22.5, 55.5, 87.0)
 
 
-
+<br/>**7. 합계 출력**<br/>
 
 ```python
 print(group1 + group2 + group3)
