@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "var 함수를 통해 데이터의 분산 구하기"
+title:  "qcut 함수를 통해 구간별 데이터 나누가"
 ---
 
 <br/>**Data**<br/>
