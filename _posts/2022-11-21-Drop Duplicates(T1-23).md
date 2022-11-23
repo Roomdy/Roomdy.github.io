@@ -135,12 +135,10 @@ top10=df['f1'].sort_values(ascending=False).iloc[9]
   #df의 'f1'컬럼을 내림차순으로 정렬 후 10번째 값 저장(iloc는 인덱스 기반)
 top10
 ```
-+ 참고로 sort+values 함수는<br/>데이터프레임일 경우 dataframe.sort_values(by='기준 컬럼', ascending=False) 형식<br/>시리즈일 경우 series.srot_values(ascending=False)형식을 취합니다.
-
-
 
     88.0
 
++ 참고로 sort+values 함수는<br/>데이터프레임일 경우 dataframe.sort_values(by='기준 컬럼', ascending=False) 형식<br/>시리즈일 경우 series.srot_values(ascending=False)형식을 취합니다.
 
 <br/>**4. f1 컬럼 결측치 대치**<br/>
 
