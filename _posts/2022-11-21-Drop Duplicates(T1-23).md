@@ -1,9 +1,33 @@
+---
+layout: single
+title:  "drop_duplicate 함수로 중복값 제거하기"
+---
+
+<br/>**Data**<br/>
+
+출처는 Kaggle의 Big Data Certification 입니다.<br/>
+[출처 이동](https://www.kaggle.com/code/agileteam/py-t1-8-expected-questions/notebook)
+
+<br/>**Question**<br/>
+
+1. f1 컬럼의 결측치를 내림차순 10번째 값으로 채우기
+2. age 컬럼의 중복값 제거 전과 후의 f1 컬럼의 중앙값 차이 구하기
+
+<br/>**0. 처음 등장하는 함수**<br/>
+
+    dataframe.drop_duplicates(subset=['대상 컬럼'])
+    
++ 대상 컬럼을 기준으로 중복된 데이터 발생시 뒤에 나오는 행을 삭제합니다.
+
+
+<br/>**1. 라이브러리 및 데이터 불러오기**<br/>
+
 ```python
-import pandas as pd
-import numpy as np
-df=pd.read_csv('C:/Users/woody/data/basic1.csv')
+import pandas as pd                                #판다스 불러오기
+df=pd.read_csv('C:/Users/woody/data/basic1.csv')   #데이터 불러오기
 ```
 
+<br/>**2. EDA**<br/>
 
 ```python
 df.info()
@@ -28,21 +52,6 @@ df.tail()
     
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -119,45 +128,31 @@ df.tail()
 </div>
 
 
-
+<br/>**3. f1 컬럼을 내림차순으로 정렬 후 10번째 값 저장하기**<br/>
 
 ```python
 top10=df['f1'].sort_values(ascending=False).iloc[9]
-  #df의 'f1'컬럼을 내림차순으로 정렬 후 9번째 값 저장
-  #dataframe.sort_values(by='기준 컬럼', ascending=False)
-  #series.srot_values(ascending=False)
+  #df의 'f1'컬럼을 내림차순으로 정렬 후 10번째 값 저장(iloc는 인덱스 기반)
 top10
 ```
-
++ 참고로 sort+values 함수는<br/>데이터프레임일 경우 dataframe.sort_values(by='기준 컬럼', ascending=False) 형식<br/>시리즈일 경우 series.srot_values(ascending=False)형식을 취합니다.
 
 
 
     88.0
 
 
+<br/>**4. f1 컬럼 결측치 대치**<br/>
 
 
 ```python
-df['f1']=df['f1'].fillna(top10)   #10번째 큰 값으로 결측치 대체
+df['f1']=df['f1'].fillna(top10) 
 df.tail()
 ```
 
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -233,7 +228,7 @@ df.tail()
 </table>
 </div>
 
-
+<br/>**5.중복값 제거 전 f1 컬럼의 중앙값 저장**<br/>
 
 
 ```python
@@ -246,12 +241,12 @@ result1
 
     77.5
 
-
+<br/>**6. drop_duplicates 함수로 중복값 제거**<br/>
 
 
 ```python
-df2=df.drop_duplicates(subset=['age'])  #drop_duplicate 함수로 중복값 제거
-df2.info()                              #100행에서 71행으로 줄어들었음을 알 수 있습니다.
+df2=df.drop_duplicates(subset=['age'])
+df2.info()        #100행에서 71행으로 줄어들었음을 알 수 있습니다.
 ```
 
     <class 'pandas.core.frame.DataFrame'>
@@ -270,10 +265,10 @@ df2.info()                              #100행에서 71행으로 줄어들었�
     dtypes: float64(3), int64(1), object(4)
     memory usage: 5.0+ KB
     
-
+<br/>**7. 중복값 제거 후 f1 컬럼의 중앙값 저장**<br/>
 
 ```python
-result2=df2['f1'].median()   #중복값 제거 후 중앙값 저장
+result2=df2['f1'].median()  
 result2
 ```
 
@@ -283,10 +278,10 @@ result2
     77.0
 
 
-
+<br/>**9. 중앙값 차이 출력**<br/>
 
 ```python
-abs(result1-result2)      #차이 출력
+abs(result1-result2)   
 ```
 
 
