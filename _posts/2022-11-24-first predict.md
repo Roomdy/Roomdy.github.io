@@ -10,6 +10,7 @@ title:  "(기초)파이썬으로 분류 모델 만들기"
 
 <br/>**Data**<br/>
 
+[데이터 가져오기](https://github.com/7ieon/bigData)
 + y_train.csv: 고객 성별 데이터(학습용)
 + x_train.csv, x_test.csv: 고객의 상품 구매 속성(학습용 및 검증용)
 
