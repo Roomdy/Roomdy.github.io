@@ -1,15 +1,21 @@
-데이터 분석 연습하기 - 예측 model
+---
+layout: single
+title:  "(기초)퍼이썬으로 예측 모형 만들기"
+---
 
+<br/>**Question**<br/>
 
-```python
-#data: y_train.csv (고객 성별 데이터)<br/>x_train.csv, x_test.csv(고객의 상품 구매 속성)
-```
+1. 고객의 상품 구매 속성으로 성별 예측 모형 만들기
+2. 고객의 성별 예측값(남자일 확률) 데이터 생성
 
+<br/>**Data**<br/>
 
-```python
-#성별 예측 모형으로 남자일 확률 구하기
-```
++ y_train.csv: 고객 성별 데이터(학습용)
++ x_train.csv, x_test.csv: 고객의 상품 구매 속성(학습용 및 검증용)
 
+<br/>#1. 데이터 탐색<br/>
+
+<br/>**1-1 라이브러리 및 데이터 불러오기**<br/>
 
 ```python
 import pandas as pd
@@ -18,6 +24,7 @@ x_test = pd.read_csv('C:/Users/woody/data2/x_test.csv',encoding='CP949')
 y_train = pd.read_csv('C:/Users/woody/data2/y_train.csv',encoding='CP949')
 ```
 
+<br/>**1-2 데이터 탐색 수행(EDA)**<br/>
 
 ```python
 print(x_train.info(), x_test.info(), y_train.info())
@@ -76,21 +83,6 @@ x_train.head(3)  #고객의 상품 구매 속성(훈련용)
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -160,21 +152,6 @@ x_test.head(3)   #고객의 상품 구매 속성(검증용)
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -245,20 +222,6 @@ y_train.head(3)  #고객의 성별 데이터
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -288,38 +251,36 @@ y_train.head(3)  #고객의 성별 데이터
 </table>
 </div>
 
+<br/>#2. 데이터 전처리<br/>
 
+<br/>**2-1 불필요한 컬럼 삭제**<br/>
 
-1. 전처리
-1) 불필요한 컬럼 삭제
-
++ 목적에 맞는 데이터들로 구성되어 있는지 확인합니다.
++ 데이터의 cust_id는 성별 예측을 위한 정보가 아님을 알 수 있습니다.
 
 ```python
-#목적에 맞는 데이터들로 구성되어 있는지? 
-#데이터의 cust_id는 성별 예측을 위한 정보x
-x_test_cust_id = x_test['cust_id'] # 최종제출시 필요한 검증용 cust_id 컬럼만 따로 저장
 
 x_train=x_train.drop(columns=['cust_id'])
 x_test=x_test.drop(columns=['cust_id'])
 y_train = y_train.drop(columns=['cust_id'])
 ```
 
-2) 결측치 제거
+<br/>**2-2 결측치 제거**<br/>
 
++ info() 탐색 결과 환불금액에 결측치가 많음을 알 수 있었습니다.
++ 환불금액이 없다는 것은 활불내역이 없다는 것을 뜻합니다.
++ 그러므로 fillna(0) 함수로 결측치를 0으로 채워줍니다.
 
 ```python
-#info() 탐색 결과 환불금액에 결측치가 많음을 알 수 있었습니다.
-#환불금액이 없다는 것은 활불내역이 없다는 것을 뜻합니다.
-#그러므로 결측치를 0으로 채워줍니다.
 x_train['환불금액']=x_train['환불금액'].fillna(0)
 x_test['환불금액']=x_test['환불금액'].fillna(0)
 ```
 
-3) 범주형 인코딩
+<br/>**2-3 범주형 변수 인코딩**<br/>
 
-
++ 모델 학습을 위해 범주형 변수들은 인코딩을 수행합니다.
++ 
 ```python
-# 학습을 위해 범주형 변수들은 인코딩을 수행해줍니다.
 from sklearn.preprocessing import LabelEncoder
 # sklearn의 preprocessing 모듈에서 LabelEncoder 함수를 불러옵니다.
 ```
@@ -343,9 +304,9 @@ print(encoder.classes_)
      '차/커피' '축산가공' '침구/수예' '캐주얼' '커리어' '통신/컴퓨터' '트래디셔널' '피혁잡화' '화장품']
     
 
++ 마찬가지로, 나머지 범주형 컬럼과 x_test의 데이터도 똑같이 인코딩을 수행합니다.
 
 ```python
-#나머지 범주형 컬럼과 x_test의 데이터도 똑같이 인코딩을 수행합니다.
 x_test['주구매상품'] = encoder.fit_transform(x_test['주구매상품'])
 print(encoder.classes_)
 x_train['주구매지점'] = encoder.fit_transform(x_train['주구매지점'])
@@ -366,51 +327,36 @@ print(encoder.classes_)
      '포항점']
     
 
-3) 파생변수 생성
+<br/>**2-4 파생변수 생성**<br/>
 
++ insight: 환불내역의 유무에 따라 결과가 달라질 수도 있습니다.
++ 환불금액 유무 컬럼을 추가해 환불 내역이 있다면 1, 없다면 2를 저장합니다.
 
 ```python
-# 환불내역의 유무에 따라 결과가 달라질 수 있으니 환불내역 유무 컬럼을 생성합니다.
 cond=x_train['환불금액']>0
 x_train.loc[cond,'환불금액 유무']=1
 x_train.loc[~cond,'환불금액 유무']=0
-#~: 조건에 맞지 않는 데이터를 반환하고 싶은 경우 사용합니다.
+#~cond: 조건에 맞지 않는 데이터를 반환하고 싶은 경우 사용합니다.
 ```
 
++ 마찬가지로, x_test에도 동일한 과정을 수행합니다.
 
 ```python
-#x_test에도 동일한 과정을 수행합니다.
 cond=x_test['환불금액']>0
 x_test.loc[cond,'환불금액 유무']=1
 x_test.loc[~cond,'환불금액 유무']=0
 ```
 
-4) 데이터 스케일링
+<br/>**2-5 데이터 스케일링**<br/>
 
++ 스케일링이 필요한지를 알아보기 위해 기초통계량을 조회합니다.
++ 만약, 데이터 분포가 고르다면, 굳이 스케일링을 수행할 필요는 없습니다.
 
 ```python
-#스케일링이 필요한지를 알아보기 위해 기초통계량을 조회합니다.
 x_train.describe().T
-#.T: 행과 열을 뒤바꿔주며 좀 더 데이터를 보기 편리하게 만들어줍니다.
-#평균이 e+07정도 차이가남을 알 수 있습니다.
+#.T: 행과 열을 뒤바꿔 데이터를 보기 편하게 만들어줍니다.
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -541,7 +487,7 @@ x_train.describe().T
 </table>
 </div>
 
-
++ 평균이 e+07정도 차이가나므로 스케일링 과정을 수행합니다.
 
 
 ```python
@@ -561,29 +507,14 @@ x_train=pd.DataFrame(scaler.fit_transform(x_train),
 x_test=pd.DataFrame(scaler.fit_transform(x_test), 
                     columns=x_test.columns)
 ```
-
++ 스케일링을 수행하면 데아터가 array(배열)로 저장되므로 pd.DataFrame 명령을 통해 데이터프레임으로 변환해주고, columns 옵션을 통해 컬럼 명을 붙여줍니다.
 
 ```python
 x_train.describe().T
-#평균이 0, std가 1에 근사값으로 변환되었음을 알 수 있습니다.
 ```
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -714,34 +645,19 @@ x_train.describe().T
 </table>
 </div>
 
++ 평균이 0, std가 1에 근사한 값으로 변환되었습니다.
 
+<br/>**2-6 다중공산성 확인**<br/>
 
-5) 다중공산성 확인
- 변수간의 상관계수가 크면 결과의 정확도가 떨어지므로 상관계수가 큰 변수는 제거해줍니다.
++ 다중공산성: 독립변수들 간에 강한 상관관계가 있다면 예측 결과에 부정적 영향을 미치게 됩니다.
++ 금액과 관련된 변수들의 상관관계를 조회한 후 상관계수가 큰 변수는 제거해주겠습니다.
 
 
 ```python
 x_train[['총구매액','최대구매액','환불금액 유무']].corr()
-#금액과 관련있는 변수들의 상관관계를 조회합니다.
-#총구매액과 최대구매액의 상관계수가 0.700080으로 큰 것을 알 수 있습니다.
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -775,7 +691,7 @@ x_train[['총구매액','최대구매액','환불금액 유무']].corr()
 </table>
 </div>
 
-
++ 총구매액과 최대구매액의 상관계수가 0.700080으로 큰 것을 알 수 있습니다.
 
 
 ```python
@@ -786,25 +702,10 @@ del x_test['최대구매액']
 
 
 ```python
-x_train.head(3)
+x_train.head(3)  #작업내역 확인
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -862,27 +763,24 @@ x_train.head(3)
 </table>
 </div>
 
+<br/>#3. 모델 학습 및 평가<br/>
 
++ 성별 예측 모델은 성별을 분류할 수 있는 모델을 만들어야 하므로, 의사결정나무 분류기를 사용하겠습니다.
 
-학습 및 평가
-성별 예측 -> 성별 컬럼 분류 -> 의사결정나무 분류기 사용
-
+<br/>#3-1 모델 학습시키기<br/>
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
 model = DecisionTreeClassifier(
          max_depth=10, criterion='entropy')
  # model 객체에 하이퍼 파라미터를 튜닝합니다.
+ # max+depth = 의사결정나무의 최대 깊이를 조정합니다. <br/> 깊이가 너무 깊어지면 과적합될 수 있으니 적당히 10으로 조정합니다.
 model.fit(x_train, y_train)       #model에 데이터 학습시키기
 ```
 
+<br/>#3-2 테스트<br/>
 
-
-
-    DecisionTreeClassifier(criterion='entropy', max_depth=10)
-
-
-
++ 훈련용 데이터로 학습시킨 모델에 검증용 데이터인 x_test를 넣의 y의 예측값(y_test_pred)을 반환합니다.
 
 ```python
 y_test_pred = model.predict(x_test) 
@@ -894,14 +792,15 @@ print(pd.DataFrame(y_test_pred).head(3))   #예측된 데이터를 조회합니�
     0  1
     1  0
     2  0
-    
 
-예측
++ 예측된 값이 정상적으로 출력됨을 알 수 있습니다.
 
+<br/>#3-3 예측 수행하기<br/>
+
++ 문제에선 성별 분류가 아닌 남자일 확률을 요구하고 있습니다.
++ predict_proba(): 예측값의 확률을 반환합니다.
 
 ```python
-#문제에선 성별에 대한 확률을 요구하고 있습니다.
-#predict_proba() 는 예측값의 확률을 반환합니다.
 y_test_proba=model.predict_proba(x_test)
 print(pd.DataFrame(y_test_proba).head(3))
 ```
@@ -911,32 +810,17 @@ print(pd.DataFrame(y_test_proba).head(3))
     1  0.921569  0.078431
     2  1.000000  0.000000
     
-
++ 0 컬럼은 여자일 확률, 1 컬럼을 남자일 확률을 뜻합니다.
++ 0 컬럼은 필요없으니 삭제해줍니다.
 
 ```python
-#문제에선 남자일 확률을 요구하고 있습니다.
-#0 컬럼(여자일 확률)을 삭제해줍니다.
-result=pd.DataFrame(y_test_proba)   #result 변수의 예측값을 저장합니다.
-del result[0]                       
-result.head()
+result=pd.DataFrame(y_test_proba)   #result 변수에 예측값을 저장합니다.
+del result[0]                       #0 컬럼 삭제
+result.head()                       #데이터 확인
 ```
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -970,18 +854,17 @@ result.head()
 </table>
 </div>
 
+<br/>**3-4 모델 평가하기**<br/>
 
++ y_test 값(검증용 데이터)이 존재하지 않으니<br/>model에 학습용 데이터를 넣어 예측값 y_train_pred를 생성한 후<br/>실제 y_train 데이터로 평가를 수행합니다.
 
-평가
-y_test 값(검증용 데이터)이 존재하지 않으니,
-model에 학습용 데이터를 넣어 예측값 y_train_pred를 생성한 후
-실제 y_train 데이터로 평가를 수행합니다.
-
-
++ 먼저, model을 통해 예측값 y_train_pred을 생성합니다. 
 ```python
 y_train_pred=model.predict(x_train)
 ```
 
++ 모델 평가를 위해 roc_auc_score을 불러옵니다.
++ roc_auc_score: 1에 가까울 수록 좋은 모델을 뜻합니다.
 
 ```python
 from sklearn.metrics import roc_auc_score
@@ -991,17 +874,13 @@ from sklearn.metrics import roc_auc_score
 
 ```python
 print(roc_auc_score(y_train,y_train_pred))
-#roc_auc_score는 1에 가까울수록 좋은 수치이니, 괜찮은 모델이 생성되었음을 알 수 있습니다.
+#나름 괜찮은 모델이 생성되었음을 알 수 있습니다.
 ```
 
     0.7116504948951758
     
 
-
-```python
-결과 제출
-```
-
+<br/>#4 결과 제출하기<br/>
 
 ```python
 #최종 데이터는 cust_id 값과 y_test의 예측값이 함계 출력되어야 합니다.
@@ -1011,20 +890,6 @@ pd.concat([x_test_cust_id, result],axis=1)  #수평결합
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
