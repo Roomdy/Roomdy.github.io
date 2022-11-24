@@ -279,7 +279,7 @@ x_test['환불금액']=x_test['환불금액'].fillna(0)
 <br/>**2-3 범주형 변수 인코딩**<br/>
 
 + 모델 학습을 위해 범주형 변수들은 인코딩을 수행합니다.
-+ 
+
 ```python
 from sklearn.preprocessing import LabelEncoder
 # sklearn의 preprocessing 모듈에서 LabelEncoder 함수를 불러옵니다.
