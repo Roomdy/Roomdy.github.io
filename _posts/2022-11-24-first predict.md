@@ -63,7 +63,6 @@ print(x_train.info(), x_test.info(), y_train.info())
      7   내점당구매건수  2482 non-null   float64
      8   주말방문비율   2482 non-null   float64
      9   구매주기     2482 non-null   int64  
-    dtypes: float64(3), int64(5), object(2)
     memory usage: 194.0+ KB
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 3500 entries, 0 to 3499
@@ -767,7 +766,7 @@ x_train.head(3)  #작업내역 확인
 
 + 성별 예측 모델은 성별을 분류할 수 있는 모델을 만들어야 하므로, 의사결정나무 분류기를 사용하겠습니다.
 
-<br/>#3-1 모델 학습시키기<br/>
+<br/>**3-1 모델 학습시키기**<br/>
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
@@ -778,7 +777,7 @@ model = DecisionTreeClassifier(
 model.fit(x_train, y_train)       #model에 데이터 학습시키기
 ```
 
-<br/>#3-2 테스트<br/>
+<br/>**3-2 테스트**<br/>
 
 + 훈련용 데이터로 학습시킨 모델에 검증용 데이터인 x_test를 넣의 y의 예측값(y_test_pred)을 반환합니다.
 
@@ -795,7 +794,7 @@ print(pd.DataFrame(y_test_pred).head(3))   #예측된 데이터를 조회합니�
 
 + 예측된 값이 정상적으로 출력됨을 알 수 있습니다.
 
-<br/>#3-3 예측 수행하기<br/>
+<br/>**3-3 예측 수행하기**<br/>
 
 + 문제에선 성별 분류가 아닌 남자일 확률을 요구하고 있습니다.
 + predict_proba(): 예측값의 확률을 반환합니다.
