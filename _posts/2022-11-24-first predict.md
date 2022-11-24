@@ -19,9 +19,9 @@ title:  "(기초)파이썬으로 분류 모델 만들기"
 
 ```python
 import pandas as pd
-x_train = pd.read_csv('C:/Users/woody/data2/x_train.csv',encoding='CP949')
-x_test = pd.read_csv('C:/Users/woody/data2/x_test.csv',encoding='CP949')
-y_train = pd.read_csv('C:/Users/woody/data2/y_train.csv',encoding='CP949')
+x_train = pd.read_csv('...data2/x_train.csv',encoding='CP949')
+x_test = pd.read_csv('...data2/x_test.csv',encoding='CP949')
+y_train = pd.read_csv('...data2/y_train.csv',encoding='CP949')
 ```
 
 <br/>**1-2 데이터 탐색 수행(EDA)**<br/>
