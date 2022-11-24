@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "(기초)퍼이썬으로 예측 모형 만들기"
+title:  "(기초)파이썬으로 분류 모델 만들기"
 ---
 
 <br/>**Question**<br/>
