@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "cumsum 함수로 누적합 계산하기"
+title:  "MinMaxScaler로 데이터 표준화 시키기"
 ---
 
 <br/>**Data**<br/>
