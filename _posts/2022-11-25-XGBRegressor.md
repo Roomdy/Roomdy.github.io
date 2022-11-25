@@ -1,12 +1,12 @@
-data
+<br/>**Data**<br/>
 + bike_y_train.csv: 시간당 자전거 대여량 데이터
 + bike_x_train.csv, bike_x_test.csv: 고객의 자전거 대여 속성
 
-Question
+<br/>**Question**<br/>
 + 자전거 대여량 예측 모형 생성하기
 
-# 1. 데이터 탐색
-**1-1 라이브러리 및 데이터 불러오기**
+<br/># 1. 데이터 탐색<br/>
+<br/>**1-1 라이브러리 및 데이터 불러오기**<br/>
 
 
 ```python
@@ -18,7 +18,7 @@ y_train=pd.read_csv('...data2/bike_y_train.csv', encoding='CP949')
 #실제 시험환경에선 사용할 일이 없다고 합니다.
 ```
 
-**1-2 EDA 수행**
+<br/>**1-2 EDA 수행**<br/>
 
 
 ```python
@@ -194,7 +194,7 @@ x_train.describe().T
 
 
 
-**1-3 독립변수와 종속변수**
+<br/>**1-3 독립변수와 종속변수**<br/>
 + 회귀 분석에서 중요한 것은 독립변수와 종속변수간의 관계를 먼저 파악하는 것입니다.
 + 먼저, 범주형 변수들과 종속변수간의 관계를 파악해 보겠습니다.
 
@@ -292,9 +292,9 @@ data.groupby(['날씨'])['count'].sum()
 + 날씨가 좋을 수록 값이 커짐을 알 수 있습니다.
 + **각 독립변수들이 종속변수에 영향을 주고 있습니다.**
 
-# 2. 데이터 전처리
+<br/># 2. 데이터 전처리<br/>
 
-**2-1 파생변수, 요일 데이터 생성**
+<br/>**2-1 파생변수, 요일 데이터 생성**<br/>
 
 
 ```python
@@ -619,9 +619,9 @@ y_train=y_train.drop(columns=['癤풼atetime'])
 #인코딩 오류로 y_train의 컬럼 이름만 이상하게 표시되는데 무시하겠습니다.
 ```
 
-# 3. 모델 학습 및 평가
+<br/># 3. 모델 학습 및 평가<br/>
 
-**3-1 데이터분리**
+<br/>**3-1 데이터분리**<br/>
 
 + 먼저, 모델을 2개 생성한 후 더 성능이 좋은 모델을 사용하도록 하겠습니다.
 + 성능을 테스트하기 위해선 검증용 Y_TEST 데이터가 필요하니, 기존 훈련용 데이터를 혼련용과 검증용 데이터로 분리하여 사용하겠습니다.
@@ -661,14 +661,6 @@ pip install xgboost
 #xgboost 모듈을 먼저 설치해줍니다.
 ```
 
-    Collecting xgboostNote: you may need to restart the kernel to use updated packages.
-    
-      Downloading xgboost-1.7.1-py3-none-win_amd64.whl (89.1 MB)
-         --------------------------------------- 89.1/89.1 MB 19.3 MB/s eta 0:00:00
-    Requirement already satisfied: numpy in c:\users\woody\anaconda3\lib\site-packages (from xgboost) (1.21.5)
-    Requirement already satisfied: scipy in c:\users\woody\anaconda3\lib\site-packages (from xgboost) (1.9.1)
-    Installing collected packages: xgboost
-    Successfully installed xgboost-1.7.1
     
 
 
@@ -705,8 +697,7 @@ model2.fit(X_TRAIN,Y_TRAIN)
 
 
 
-**3-3 결과 예측**
-
+<br/>**3-3 결과 예측**<br/>
 
 ```python
 # 더 성능이 좋은 모델을 찾기 위해 r2 score를 계산합니다.
@@ -893,7 +884,7 @@ y_test_pred.head(3)
 
 
 
-# 4. 결과 제출
+<br/># 4. 결과 제출<br/>
 
 + 따로 저장해뒀던 datetime 컬럼과 예측값을 수평결합한 후
 + to_csv()함수를 통해 csv 파일로 저장해줍니다.
