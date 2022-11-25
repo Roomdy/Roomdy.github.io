@@ -1,6 +1,12 @@
+---
+layout: single
+title:  "(기초)파이썬 XGBRgressor로 예측 모델 만들기"
+---
+
 <br/>**Data**<br/>
 + bike_y_train.csv: 시간당 자전거 대여량 데이터
 + bike_x_train.csv, bike_x_test.csv: 고객의 자전거 대여 속성
+[데이터 가져오기](https://github.com/7ieon/bigData)
 
 <br/>**Question**<br/>
 + 자전거 대여량 예측 모형 생성하기
