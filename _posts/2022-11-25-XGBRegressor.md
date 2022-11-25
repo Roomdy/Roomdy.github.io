@@ -11,9 +11,11 @@ Question
 
 ```python
 import pandas as pd
-x_train=pd.read_csv('C:/Users/woody/data2/bike_x_train.csv', encoding='CP949')
-x_test=pd.read_csv('C:/Users/woody/data2/bike_x_test.csv', encoding='CP949')
-y_train=pd.read_csv('C:/Users/woody/data2/bike_y_train.csv', encoding='CP949')
+x_train=pd.read_csv('...data2/bike_x_train.csv', encoding='CP949')
+x_test=pd.read_csv('...data2/bike_x_test.csv', encoding='CP949')
+y_train=pd.read_csv('...data2/bike_y_train.csv', encoding='CP949')
+#인코딩 오류로  encoding='CP949' 옵션을 추가했습니다.
+#실제 시험환경에선 사용할 일이 없다고 합니다.
 ```
 
 **1-2 EDA 수행**
