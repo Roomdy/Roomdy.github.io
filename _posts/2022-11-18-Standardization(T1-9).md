@@ -143,8 +143,7 @@ scaler = StandardScaler()         #scaler라는 객체 생성
 [왜 fit_tranform 매서드를 사용하는 걸까](https://deepinsight.tistory.com/165)
 
 ```python
-scaler.fit_transform(df[['f5']])[0:9]      #객체에 fit_transform() 명령
-df['f5']=scaler.fit_transform(df[['f5']])  #df에 저장
+df['f5']=scaler.fit_transform(df[['f5']])  #f5 컬럼에 저장
 ```
 
 <br/>**5. 중앙값 출력**<br/>
