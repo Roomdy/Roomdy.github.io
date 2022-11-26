@@ -1,45 +1,10 @@
+<br/>**Question**<br/>
+
 타이타닉 생존자 예측 모형 만들기
 
-Data
+<br/>**Data**<br/>
 + y_train: 생존여부(학습용)
 + x_train, x_test: 승객 정보 (학습 및 평가용)
-
-
-```python
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
-
-def exam_data_load(df, target, id_name="", null_name=""):
-    if id_name == "":
-        df = df.reset_index().rename(columns={"index": "id"})
-        id_name = 'id'
-    else:
-        id_name = id_name
-    
-    if null_name != "":
-        df[df == null_name] = np.nan
-    
-    X_train, X_test = train_test_split(df, test_size=0.2, random_state=2021)
-    
-    y_train = X_train[[id_name, target]]
-    X_train = X_train.drop(columns=[target])
-
-    
-    y_test = X_test[[id_name, target]]
-    X_test = X_test.drop(columns=[target])
-    return X_train, X_test, y_train, y_test 
-    
-df = pd.read_csv("C:/Users/woody/data/train.csv")
-X_train, X_test, y_train, y_test = exam_data_load(df, target='Survived', id_name='PassengerId')
-
-X_train.shape, X_test.shape, y_train.shape, y_test.shape
-```
-
-
-
-
-    ((712, 11), (179, 11), (712, 2), (179, 2))
 
 
 
@@ -228,7 +193,7 @@ y_train.head(3)
 
 # 2. 데이터 전처리
 
-**2-1 불필요한 컬럼 삭제**
+<br/>**2-1 불필요한 컬럼 삭제**<br/>
 + 이름은 탑승자 id로 확인할 수 있고, 최종 제출시에도 불필요하니 삭제해줍니다.
 
 
@@ -241,7 +206,7 @@ del X_train['Name']
 del X_test['Name']
 ```
 
-**2-2 범주형을 수치형으로 변환(인코딩)**
+<br/>**2-2 범주형을 수치형으로 변환(인코딩)**<br/>
 
 
 ```python
@@ -441,7 +406,7 @@ X_test['Parch']=encoder.fit_transform(X_test['Parch'])
 X_test['Embarked']=encoder.fit_transform(X_test['Embarked'])
 ```
 
-**2-3 결측치 처리**
+<br/>**2-3 결측치 처리**<br/>
 + Age 컬럼의 결측치는 평균나이로 대치하겠습니다.
 
 
@@ -458,7 +423,7 @@ X_train=X_train.drop(columns=['Cabin'])
 X_test=X_test.drop(columns=['Cabin'])
 ```
 
-**2-4 데이터 스케일링**
+<br/>**2-4 데이터 스케일링**<br/>
 + 데이터의 분포가 일의 자리에서 백의 자리로 크지 않으므로 스케일링은 수행하지 않겠습니다.
 
 
@@ -592,7 +557,7 @@ X_train.describe().T
 
 
 
-**2-5 다중공산성 확인**
+<br/>**2-5 다중공산성 확인**<br/>
 + 각 변수들의 상관관계를 확인 후 예측 결과에 부정적 영향을 미치는 상관관계가 큰 변수를 제거해주겠습니다.
 
 
@@ -750,23 +715,10 @@ X_test=X_test.drop(columns='PassengerId')
 y_train=y_train.drop(columns='PassengerId')
 ```
 
-
-```python
-del X_train['Ticket']
-```
-
-
-```python
-del X_test['Ticket']
-```
-
-
 ```python
 model.fit(X_train, y_train)  #모델 학습시키기
 ```
 
-    C:\Users\woody\AppData\Local\Temp\ipykernel_1576\180087699.py:1: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples,), for example using ravel().
-      model.fit(X_train, y_train)
     
 
 
@@ -778,7 +730,9 @@ model.fit(X_train, y_train)  #모델 학습시키기
 
 
 ```python
-y_pred=model.predict(X_test)   #예측값 생성
+y_pred=mo
+
+.predict(X_test)   #예측값 생성
 len(X_test)
 ```
 
@@ -789,7 +743,7 @@ len(X_test)
 
 
 
-**모델 평가하기**
+<br/>**모델 평가하기**<br/>
 
 
 ```python
