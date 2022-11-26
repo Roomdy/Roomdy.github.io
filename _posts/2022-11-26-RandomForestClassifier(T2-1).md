@@ -18,10 +18,8 @@ import numpy as np
 #데이터는 위 시험환경 세팅에서 이미 불러왔으므로 생략합니다.
 ```
 
-
-```python
 <br/>**1-2 EDA 수행**<br/>
-```
+
 
 
 ```python
