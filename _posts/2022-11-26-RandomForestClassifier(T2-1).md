@@ -705,6 +705,7 @@ from sklearn.ensemble import RandomForestClassifier #랜덤포레스트 분류�
 
 
 ```python
+
 model=RandomForestClassifier(n_estimators=200, max_depth=7)
 # 하이퍼 파라미터 튜닝은 해설에 있는 값을 따라했습니다.
 ```
@@ -734,16 +735,9 @@ model.fit(X_train, y_train)  #모델 학습시키기
 
 
 ```python
-y_pred=mo
-
-.predict(X_test)   #예측값 생성
-len(X_test)
+y_pred=model.predict(X_test)   #예측값 생성
 ```
 
-
-
-
-    179
 
 
 
@@ -768,5 +762,5 @@ model.score(X_train,y_train)
 ```python
 result=pd.DataFrame(y_pred) # y 예측값을 데이터프레임으로 저장
 final=pd.concat([x_test_id,result],axis=1)
-#final.to_csv('data/12345.csv,index=False') 명령으로 저장
+ #final.to_csv('data/12345.csv,index=False') 명령으로 저장
 ```
