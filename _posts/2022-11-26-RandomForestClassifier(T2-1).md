@@ -1,3 +1,8 @@
+---
+layout: single
+title:  "(기초)파이썬 RandomForestClassifier로 예측 모델 만들기"
+---
+
 <br/>**Question**<br/>
 
 타이타닉 생존자 예측 모형 만들기
@@ -5,6 +10,7 @@
 <br/>**Data**<br/>
 + y_train: 생존여부(학습용)
 + x_train, x_test: 승객 정보 (학습 및 평가용)
+[데이터 가져오기](https://www.kaggle.com/competitions/titanic/data)
 
 
 
@@ -15,7 +21,7 @@
 ```python
 import pandas as pd
 import numpy as np
-#데이터는 위 시험환경 세팅에서 이미 불러왔으므로 생략합니다.
+#데이터 불러오기는 생략했습니다.
 ```
 
 <br/>**1-2 EDA 수행**<br/>
