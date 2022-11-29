@@ -23,11 +23,10 @@ title:  "빅데이터 분석 기사 실기 - 유형1 함수 정리"
     df.fillna(method='bfill')     #바로 다음값으로 대체
     df.fillna(method='ffill')     #바로 직전값으로 대체
 
-+ 심화) map 활용
-
-    df['column'].fillna(df['기준 column'].map({A:a, B:b, ...})
+    #심화: map 함수 활용
+    df['column'].fillna(df['기준 column'].map({A:a, B:b, ...}))
     # map 함수: 사전(dict)에 정의된 내용을 변수에 저장
-    
+ 
 **3. 그룹합계**
 
     df.groupby(['기준 컬럼1', '기준 컬럼2', ...]).sum()
