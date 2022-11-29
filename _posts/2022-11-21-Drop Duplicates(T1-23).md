@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "drop_duplicate 함수로 중복값 제거하기"
+title:  "drop_duplicates 함수로 중복값 제거하기"
 ---
 
 <br/>**Data**<br/>
