@@ -1,3 +1,8 @@
+---
+layout: single
+title:  "[빅데이터분석기사] 실기 - 유형2 함수 모음"
+---
+
 **1. 라이브러리 모음**
 
     import pandas as pd
