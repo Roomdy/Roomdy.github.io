@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "비전공자도 개발자가 될 수 있을까?"
+categories: TMI
+tags: []
 ---
 
 1. 비전공자도 개발자가 될 수 있는 이유
