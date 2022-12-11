@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "결측치 처리 후 조건에 따른 평균값 계산하기"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
