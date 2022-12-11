@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "조건에 맞는 데이터의 표준편차 계산"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
