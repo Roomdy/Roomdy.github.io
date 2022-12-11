@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "corr함수로 상관관계 구하기"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
