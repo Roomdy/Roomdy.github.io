@@ -1,6 +1,6 @@
 # main links
 main:
-  - title: "Category"
+  - title: "카테고리 모아보기"
     url: /categories/
   - title: "Tag"
     url: /tags/
