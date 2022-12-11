@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "cumsum 함수로 누적합 계산하기"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
