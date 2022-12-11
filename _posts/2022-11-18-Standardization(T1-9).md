@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "StandardScaler를 사용해 수치형 변수 표준화시키기"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
