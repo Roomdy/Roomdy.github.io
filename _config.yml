@@ -16,12 +16,12 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Roomy의 성장일지"
+title                    : "Roomdy의 성장일지"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Roomy"
+name                     : "Roomdy"
 description              : "I'm unemployed in the real world, <br/> I'm a developer in other world"
-url                      : "https://Roomy.github.io"
+url                      : "https://Roomdy.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -104,7 +104,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "Roomy(Lv.1)"
+  name             : "Roomdy(Lv.1)"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "I'm unemployed in the real world, <br/> but I'm a developer in **other world**"
   location         : "Somewhere"
