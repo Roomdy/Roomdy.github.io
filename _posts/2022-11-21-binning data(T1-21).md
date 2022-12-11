@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "qcut 함수를 통해 구간별 데이터 나누가"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
