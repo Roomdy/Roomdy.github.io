@@ -1,6 +1,8 @@
 ---
 layout: single
-title:  "map함수를 활용한 결측치 처리"
+title: "map함수를 활용한 결측치 처리"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
