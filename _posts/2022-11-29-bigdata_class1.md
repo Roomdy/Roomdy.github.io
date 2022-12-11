@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "[빅데이터분석기사] 실기 - 유형1 함수 모음"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 + 사용 방법: 한번씩 따라 쓰거나 직접 쳐보면서 복습하시면 됩니다.
