@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "결측치 처리 후 그룹 합계 구하기"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
