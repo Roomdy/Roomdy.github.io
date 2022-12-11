@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "[빅데이터분석기사] 실기 - 유형2 함수 모음"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 **1. 라이브러리 모음**
