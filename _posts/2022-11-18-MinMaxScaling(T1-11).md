@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "MinMaxScaler로 데이터 표준화 시키기"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
