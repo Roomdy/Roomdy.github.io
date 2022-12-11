@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "drop_duplicates 함수로 중복값 제거하기"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
