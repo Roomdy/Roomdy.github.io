@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "(기초)파이썬 XGBRgressor로 예측 모델 만들기"
+categories: 빅데이터분석기사
+tags: [BigData, Certification]
 ---
 
 <br/>**Data**<br/>
